@@ -21,21 +21,31 @@ describe('deleting a user', () => {
   });
 
   it('class method remove', (done) => {
-    //remove a bunch of records with same criteria at the same time
+    // Remove a bunch of records with some given criteria
     User.remove({ name: 'John' })
-    .then(() => User.findOne({ name: 'John'} ))
+      .then(() => User.findOne({ name: 'John' }))
+      .then((user) => {
+        assert(user === null);
+        done();
+      });
+  });
+
+  it('class method findOneAndRemove', (done) => {
+    User.findOneAndRemove({ name: 'John' })
+      .then(() => User.findOne({ name: 'John' }))
+      .then((user) => {
+        assert(user === null);
+        done();
+      });
+  });
+
+  it('class method findByIdAndRemove', (done) => {
+    User.findByIdAndRemove(john._id)
+    .then(() => User.findOne({ name: 'John' } ))
     .then((user) => {
       assert(user === null);
       done();
     });
   });
-
-  it('class method findAndRemove', () => {
-
-  });
-
-  it('class method findByIdAndRemove', () => {
-
-  })
 
 });

@@ -5,7 +5,7 @@ describe('Reading users out of the database', () => {
   let john;
 
   //to check that a john is in the database
-  beforeEach(() => {
+  beforeEach((done) => {
     john = new User({ name: 'John' })
     john.save()
     .then(() => done());
@@ -23,7 +23,7 @@ describe('Reading users out of the database', () => {
   it('find a user with a particular id', (done) => {
     User.findOne({ _id: john._id })
       .then((user) => {
-        assert(user.name === 'John'); 
+        assert(user.name === 'John');
         done();
       });
   });
